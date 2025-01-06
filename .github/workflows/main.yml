@@ -1,0 +1,25 @@
+name: Extract Killer Tool.zip
+
+on:
+  push:
+    paths:
+      - 'Killer Tool.zip'  # This will trigger the workflow when Killer Tool.zip is updated
+  workflow_dispatch:
+
+jobs:
+  extract-zip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Extract Killer Tool.zip
+        run: |
+          # Ensure we have the correct directory and unzip the file
+          unzip "Killer Tool.zip" -d "extracted-files/"
+      
+      - name: Commit extracted files
+        run: |
+          git add extracted-files/
+          git commit -m "Extract Killer Tool.zip"
+          git push
